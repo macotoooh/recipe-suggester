@@ -24,6 +24,30 @@ this project is mainly an exploration of:
 - how prompt wording affects the quality of suggestions
 - how AI-generated output can be integrated into a simple user flow
 
+## Setup
+
+### 1. Install
+
+```bash
+npm install
+```
+
+### 2. Environment
+
+Create `.env` and set:
+
+```bash
+OPENAI_API_KEY=your_key_here
+```
+
+### 3. Run
+
+```bash
+npm run dev
+```
+
+Open http://localhost:3000
+
 ---
 
 ## このプロジェクトについて
