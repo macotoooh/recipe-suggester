@@ -1,4 +1,6 @@
-# 🍳 Recipe Suggester (WIP)
+# 🍳 Recipe Suggester
+
+![Demo](public/demo.gif)
 
 This is a small project created while learning how to use AI in product development,
 with a particular focus on **designing effective prompts for OpenAI**.
