@@ -1,62 +1,25 @@
 "use client";
 import ReactMarkdown from "react-markdown";
-import { useState } from "react";
-
-// TODO: refactor
-const defaultForm = {
-  ingredients: "egg, rice, soy sauce, green onion",
-  mood: "cozy",
-  category: "Japanese",
-  customCategory: "",
-  motivation: "low",
-  cleanup: "minimal",
-};
+import { useRecipeForm } from "./hooks/useRecipeForm";
 
 export default function Home() {
-  const [ingredients, setIngredients] = useState(defaultForm.ingredients);
-  const [mood, setMood] = useState(defaultForm.mood);
-  const [category, setCategory] = useState(defaultForm.category);
-  const [customCategory, setCustomCategory] = useState(
-    defaultForm.customCategory,
-  );
-  const [motivation, setMotivation] = useState(defaultForm.motivation);
-  const [cleanup, setCleanup] = useState(defaultForm.cleanup);
-  const [result, setResult] = useState("");
-  const [loading, setLoading] = useState(false);
-
-  const onSubmit: React.ChangeEventHandler<HTMLFormElement> = async (event) => {
-    event.preventDefault();
-    setLoading(true);
-    setResult("");
-
-    try {
-      const response = await fetch("/api/suggest", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({
-          ingredients: ingredients
-            .split(",")
-            .map((item) => item.trim())
-            .filter(Boolean),
-          mood,
-          category:
-            category === "other" && customCategory.trim()
-              ? customCategory.trim()
-              : category,
-          motivation,
-          cleanup,
-        }),
-      });
-
-      const data = await response.json();
-      setResult(data.recipes ?? "No suggestions returned.");
-    } catch (error) {
-      console.error(error);
-      setResult("Sorry, something went wrong.");
-    } finally {
-      setLoading(false);
-    }
-  };
+  const {
+    ingredients,
+    setIngredients,
+    mood,
+    setMood,
+    category,
+    setCategory,
+    customCategory,
+    setCustomCategory,
+    motivation,
+    setMotivation,
+    cleanup,
+    setCleanup,
+    result,
+    loading,
+    onSubmit,
+  } = useRecipeForm();
 
   return (
     <div className="flex min-h-screen items-center justify-center bg-zinc-50 font-sans text-zinc-900">
